@@ -110,7 +110,9 @@ if let popoverController = activityViewController.popoverPresentationController 
 > 다운로드가 끝난 후 CoreData를 fetch를 하고 TableView를 reload를 해주고 싶었으나 실패했었다.
 
 * `이유` 파일이 여러개가 존재하여, 여러개의 파일을 다운로드 하기 위해 반복문을 돌리고 있었으나, fetch와 reload를 for-in문 내부에서 해주고 있어서, 뷰가 업데이트 될 때가 있고, 안되기도 하는 현상이 나타났다.
+
 </br>
+
 * `해결` 그래서 `for-in문이 종료된 시점`에 `fetch`를 하고 view를 reload를 해주기 위해, 다운로드가 모두 완료되는 시점을 `DispatchGroup`를 활용하여 `추적`하고, 반복문에서 시작되었던 다운로드 작업이 모두 끝나게 되면 아래 뷰를 다시 설정하도록 코드를 수정하였다.
 
 ```swift
